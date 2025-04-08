@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import 'reflect-metadata';
 
 // ✅ 引入统一响应 & 错误处理
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';

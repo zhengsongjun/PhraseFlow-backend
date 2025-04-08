@@ -43,7 +43,6 @@ export class ArticleController {
     @Query('page') page = 1,
     @Query('pageSize') pageSize = 10
   ): Promise<PaginationResult<Article>> {
-    console.log('进来');
     return this.service.findAll(+page, +pageSize);
   }
 
