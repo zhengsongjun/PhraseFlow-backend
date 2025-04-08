@@ -7,6 +7,7 @@ import { ArticleModule } from '@/modules/article/article.module';
 import { ParagraphModule } from '@/modules/paragraph/paragraph.module';
 import { ChunkModule } from '@/modules/chunk/chunk.module';
 import { WordModule } from '@/modules/word/word.module';
+import { UserModule } from './modules/user/use.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { WordModule } from '@/modules/word/word.module';
     ParagraphModule,
     ChunkModule,
     WordModule,
+    UserModule,
   ],
 })
 export class AppModule {}

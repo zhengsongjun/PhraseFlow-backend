@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import {
@@ -10,6 +18,7 @@ import {
 import { PaginationResult } from '@/common/dto/pagination-result.dto';
 import { Article } from './entities/article.entity';
 import { ApiPaginatedResponse } from '@/common/decorators/api-paginated-response.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('文章管理')
 @Controller('articles')
@@ -29,10 +38,12 @@ export class ArticleController {
     description: 'Retrieve all users',
     type: PaginationResult, // 使用 PaginationResult
   })
+  @UseGuards(JwtAuthGuard)
   findAll(
     @Query('page') page = 1,
     @Query('pageSize') pageSize = 10
   ): Promise<PaginationResult<Article>> {
+    console.log('进来');
     return this.service.findAll(+page, +pageSize);
   }
 
