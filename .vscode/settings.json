@@ -1,0 +1,20 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true, // 自动保存时格式化
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 设置默认的格式化工具为 Prettier
+  "files.exclude": {
+    "node_modules": true,
+    "dist": true
+  },
+  "prettier.requireConfig": true, // 要求项目中有 Prettier 配置文件
+  "prettier.configPath": ".prettierrc",
+  "eslint.alwaysShowStatus": true, // 显示 ESLint 状态
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ], // 配置 ESLint 检查的文件类型
+  "eslint.autoFixOnSave": true // 保存时自动修复 ESLint 错误
+}
