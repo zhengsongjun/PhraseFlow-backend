@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ActiveLogService } from './activeLog.service';
@@ -15,8 +15,35 @@ export class ActiveLogController {
   @ApiOperation({ summary: '活跃时间页面' })
   @UseGuards(JwtAuthGuard)
   create(@CurrentUser() req, @Body() dto: CreateActiveLogDto) {
-    console.log(dto);
     const userId = req.userId;
     return this.service.saveLog({ ...dto, userId });
+  }
+
+  @Get('day')
+  @ApiOperation({ summary: '获取今日学习总时长（秒）' })
+  @UseGuards(JwtAuthGuard)
+  getToday(@CurrentUser() req) {
+    return this.service.getCurrentDay(req.userId);
+  }
+
+  @Get('month')
+  @ApiOperation({ summary: '获取本月学习总时长' })
+  @UseGuards(JwtAuthGuard)
+  getMonth(@CurrentUser() req) {
+    return this.service.getCurrentMonth(req.userId);
+  }
+
+  @Get('month-map')
+  @ApiOperation({ summary: '获取本月每天学习时长（用于折线图）' })
+  @UseGuards(JwtAuthGuard)
+  getMonthMap(@CurrentUser() req) {
+    return this.service.getCurrentMonthByDayNumber(req.userId);
+  }
+
+  @Get('week')
+  @ApiOperation({ summary: '获取本周每天学习时长（用于折线图）' })
+  @UseGuards(JwtAuthGuard)
+  getWeek(@CurrentUser() req) {
+    return this.service.getCurrentWeek(req.userId);
   }
 }
