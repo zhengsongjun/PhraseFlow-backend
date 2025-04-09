@@ -9,6 +9,10 @@ export class Chunk extends BaseEntity {
   @ManyToOne(() => Paragraph, (paragraph) => paragraph.chunks)
   paragraph!: Paragraph;
 
+  @Column({ nullable: true })
+  @ApiProperty({ description: '短文id' })
+  smartArticleId!: string;
+
   @Column()
   @ApiProperty({ description: '排序' })
   sort!: number;

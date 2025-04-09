@@ -1,14 +1,53 @@
-import { Controller, Post, Patch, Get, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Patch,
+  Get,
+  Param,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { ChunkService } from './chunk.service';
 import { CreateChunkDto } from './dto/create-chunk.dto';
 import { UpdateChunkDto } from './dto/update-chunk.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Chunk } from './entities/chunk.entity';
+import { CreateSmartArticleChunkDto } from './dto/create-smart-article-chunk.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('句子块管理')
 @Controller('chunks')
 export class ChunkController {
   constructor(private readonly service: ChunkService) {}
+
+  @Post('/smart-article/:smartArticleId')
+  @ApiOperation({ summary: '创建短文chunk' })
+  @UseGuards(JwtAuthGuard)
+  async createSmartArticleChunk(
+    @Param('smartArticleId') smartArticleId: string,
+    @Body() chunks: CreateSmartArticleChunkDto[]
+  ) {
+    const result = await Promise.all(
+      chunks.map((item) =>
+        this.service.createSmartArticleChunks({
+          ...item,
+          smartArticleId: smartArticleId, // 👈 显式转换为 number
+        })
+      )
+    );
+
+    return result;
+  }
+
+  @Get('/smart-article/:smartArticleId')
+  @ApiOperation({ summary: '通过短文ID获取chunk' })
+  @UseGuards(JwtAuthGuard)
+  async toSmartArticleIdGetAllChunks(
+    @Param('smartArticleId') smartArticleId: string
+  ) {
+    const result = this.service.toSmartArticleIdGetChunkS(smartArticleId);
+    return result;
+  }
 
   @Post()
   @ApiOperation({ summary: '创建句子块' })

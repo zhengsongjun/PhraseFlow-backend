@@ -10,6 +10,7 @@ import { WordModule } from '@/modules/word/word.module';
 import { UserModule } from './modules/user/use.module';
 import { ActiveLogModule } from './modules/activityLog/activeLog.module';
 import { ParcticesStatisticModule } from './modules/practiceStatistic/practice.statistics.module';
+import { SmartActicleModule } from './modules/smartArticle/smart.article.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ParcticesStatisticModule } from './modules/practiceStatistic/practice.s
     UserModule,
     ActiveLogModule,
     ParcticesStatisticModule,
+    SmartActicleModule,
   ],
 })
 export class AppModule {}
