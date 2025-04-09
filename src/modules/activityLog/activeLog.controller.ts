@@ -26,6 +26,13 @@ export class ActiveLogController {
     return this.service.getCurrentDay(req.userId);
   }
 
+  @Get('week')
+  @ApiOperation({ summary: '获取本周每天学习时长（用于折线图）' })
+  @UseGuards(JwtAuthGuard)
+  getWeek(@CurrentUser() req) {
+    return this.service.getCurrentWeek(req.userId);
+  }
+
   @Get('month')
   @ApiOperation({ summary: '获取本月学习总时长' })
   @UseGuards(JwtAuthGuard)
@@ -38,12 +45,5 @@ export class ActiveLogController {
   @UseGuards(JwtAuthGuard)
   getMonthMap(@CurrentUser() req) {
     return this.service.getCurrentMonthByDayNumber(req.userId);
-  }
-
-  @Get('week')
-  @ApiOperation({ summary: '获取本周每天学习时长（用于折线图）' })
-  @UseGuards(JwtAuthGuard)
-  getWeek(@CurrentUser() req) {
-    return this.service.getCurrentWeek(req.userId);
   }
 }

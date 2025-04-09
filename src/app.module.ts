@@ -9,6 +9,7 @@ import { ChunkModule } from '@/modules/chunk/chunk.module';
 import { WordModule } from '@/modules/word/word.module';
 import { UserModule } from './modules/user/use.module';
 import { ActiveLogModule } from './modules/activityLog/activeLog.module';
+import { ParcticesStatisticModule } from './modules/practiceStatistic/practice.statistics.module';
 
 @Module({
   imports: [
@@ -33,14 +34,13 @@ import { ActiveLogModule } from './modules/activityLog/activeLog.module';
         logging: true,
       }),
     }),
-
-    // 你的业务模块...
     ArticleModule,
     ParagraphModule,
     ChunkModule,
     WordModule,
     UserModule,
     ActiveLogModule,
+    ParcticesStatisticModule,
   ],
 })
 export class AppModule {}
