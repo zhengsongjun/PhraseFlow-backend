@@ -14,13 +14,12 @@ export class ChunkService {
   ) {}
 
   toIdFindAllChunks(id: string): Promise<Chunk[]> {
-    return this.chunkRepo.findBy({ paragraph: { id } });
+    return this.chunkRepo.findBy({ paragraphId: id });
   }
 
   create(dto: CreateChunkDto): Promise<Chunk> {
     const chunk = this.chunkRepo.create({
       ...dto,
-      paragraph: { id: dto.paragraphId },
     });
     return this.chunkRepo.save(chunk);
   }
@@ -41,7 +40,6 @@ export class ChunkService {
     const chunks = dtoList.map((dto) =>
       this.chunkRepo.create({
         ...dto,
-        paragraph: { id: dto.paragraphId },
       })
     );
     return this.chunkRepo.save(chunks);

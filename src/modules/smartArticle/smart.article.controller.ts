@@ -1,5 +1,5 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Post, Get, Body, Delete, Param } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { SmartArticleService } from './smart.article.service';
 import { CreateSmartActicleDto } from './dto/create-smart-article.dto';
 import { PaginationResult } from '@/common/dto/pagination-result.dto';
@@ -23,5 +23,17 @@ export class SmartArticleController {
     return await this.service.create({
       ...req,
     });
+  }
+
+  @Delete('/:id')
+  @ApiOperation({ summary: '删除短文' })
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+    required: true,
+    description: '短文ID',
+  })
+  async deleteSmartArticle(@Param() id: string) {
+    return this.service.deleteSmartArticle(id);
   }
 }

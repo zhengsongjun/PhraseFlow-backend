@@ -29,7 +29,4 @@ export class Paragraph extends BaseEntity {
   @IsString()
   @ApiProperty({ description: '翻译' })
   translation!: string;
-
-  @OneToMany(() => Chunk, (chunk) => chunk.paragraph)
-  chunks!: Chunk[];
 }

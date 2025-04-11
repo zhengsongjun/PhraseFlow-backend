@@ -6,8 +6,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Chunk extends BaseEntity {
-  @ManyToOne(() => Paragraph, (paragraph) => paragraph.chunks)
-  paragraph!: Paragraph;
+  @Column({ nullable: true })
+  @ApiProperty({ description: '段落ID' })
+  paragraphId: string;
 
   @Column({ nullable: true })
   @ApiProperty({ description: '短文id' })
@@ -29,9 +30,7 @@ export class Chunk extends BaseEntity {
   @ApiProperty({ description: '翻译' })
   definition!: string;
 
-  @OneToMany(() => Word, (word) => word.chunk, {
-    cascade: true,
-    eager: true,
-  })
-  words!: Word[];
+  @Column()
+  @ApiProperty({ description: 'type是类型，word,phrase,sentence' })
+  chunkType: string;
 }

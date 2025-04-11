@@ -11,6 +11,7 @@ import { UserModule } from './modules/user/use.module';
 import { ActiveLogModule } from './modules/activityLog/activeLog.module';
 import { ParcticesStatisticModule } from './modules/practiceStatistic/practice.statistics.module';
 import { SmartActicleModule } from './modules/smartArticle/smart.article.module';
+import { ErrorRecordsModule } from './modules/errorRecords/error.records.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { SmartActicleModule } from './modules/smartArticle/smart.article.module'
     ActiveLogModule,
     ParcticesStatisticModule,
     SmartActicleModule,
+    ErrorRecordsModule,
   ],
 })
 export class AppModule {}

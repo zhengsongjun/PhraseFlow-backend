@@ -22,13 +22,17 @@ export class PracticeStasticController {
   }
 
   @Put()
-  @ApiOperation({ summary: '跟新文章练习次数' })
+  @ApiOperation({ summary: '更新文章练习次数' })
   @UseGuards(JwtAuthGuard)
   async updateArticle(
     @CurrentUser() userInfo,
     @Body() req: UpdatePracticeStatistics
   ) {
-    const result = await this.service.update(userInfo.userId, req.articleId);
+    const result = await this.service.update(
+      userInfo.userId,
+      req.articleId,
+      req.type
+    );
     return result;
   }
 }

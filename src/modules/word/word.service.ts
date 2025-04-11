@@ -9,13 +9,12 @@ import { UpdateWordDto } from './dto/update-word.dto';
 export class WordService {
   constructor(
     @InjectRepository(Word)
-    private readonly wordRepo: Repository<Word>,
+    private readonly wordRepo: Repository<Word>
   ) {}
 
   create(dto: CreateWordDto): Promise<Word> {
     const word = this.wordRepo.create({
       ...dto,
-      chunk: { id: dto.chunkId },
     });
     return this.wordRepo.save(word);
   }

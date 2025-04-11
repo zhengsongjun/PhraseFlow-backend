@@ -12,10 +12,11 @@ export class PracticeStatisticsService {
     private readonly repo: Repository<PracticeStatistic>
   ) {}
 
-  async update(userId: string, articleId: string) {
+  async update(userId: string, articleId: string, type: string) {
     const article = await this.repo.findOneBy({
       userId: userId,
       articleId: articleId,
+      type: type as 'smart',
     });
 
     if (!article) {
@@ -23,7 +24,9 @@ export class PracticeStatisticsService {
         articleId: articleId,
         userId: userId, // ✅ 确保这不是 undefined/null
         practiceCount: 0,
+        type: type,
       });
+      console.log('newState', newStat);
       return await this.repo.save(newStat); // ✅ 真正执行写入
     } else {
       article.practiceCount += 1; // 原有基础上 +1

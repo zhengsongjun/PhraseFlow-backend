@@ -4,9 +4,6 @@ import { Chunk } from '@/modules/chunk/entities/chunk.entity';
 
 @Entity()
 export class Word extends BaseEntity {
-  @ManyToOne(() => Chunk, (chunk) => chunk.words)
-  chunk!: Chunk;
-
   @Column()
   sort!: number;
 
